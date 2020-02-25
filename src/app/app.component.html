@@ -1,5 +1,5 @@
 
-<h1>Welcome to {{title}}!</h1>
+<h2 style="text-align: center;">Welcome to {{title}}!</h2>
 <!--The content below is only a placeholder and can be replaced.-->
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
   enabled. Please enable
@@ -13,39 +13,86 @@
     </div>
 
   <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
           <form class="form-inline">
               <div class="form-group">
                   <label for="connect">WebSocket connection:</label>
                   <button (click)="connect()" class="btn btn-primary" type="submit">Connect</button>
-                  <button (click)="disconnect()" class="btn btn-danger" type="submit" >Disconnect
-                  </button>
+                  <button (click)="disconnect()" class="btn btn-danger" type="submit" >Disconnect</button>
               </div>
           </form>
       </div>
-  </div>
-  <br/>
-  <div  class="row">
-    <div  class="col-md-12">
-      <form class="form-inline">
-          <div class="form-group">
-              <label for="printerName">What is Printer Name?
-                <input type="text" [(ngModel)]="printerName" class="form-control" name="printerName"> <br>
-            </label>
+
+      <div class="col-md-6">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="printerName">Set printer :</label>
+                <input type="text" [(ngModel)]="printerName" class="form-control" name="printerName" placeholder="input name here..."> <br>
             </div>
-          <button (click)="sendMessage()" class="btn btn-success" type="submit">Send</button>
-          <button (click)="printTest()" class="btn btn-success" type="submit">Print Test</button>
-      </form>
-    </div >
+            <button (click)="sendPrinter()" id="sendPrinter" class="btn btn-success" type="submit">Submit</button>
 
-
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <p>{{greeting}}</p>
+        </form>
     </div>
 
   </div>
+  <br/>
+  <div  class="row">
+    <!--
+    <div  class="col-md-12">
+      <form class="form-inline">
+          <div class="form-group">
+            </div>
+          <button (click)="printTest()" class="btn btn-success" type="submit">Print Test</button>
+      </form>
+    </div >
+  -->
+  <table id="conversation" class="table table-striped">
+    <caption></caption>
+      <thead>
+
+      <tr>
+          <th id="tableHeader">Printer Name</th>
+
+          <td>
+            <button (click)="findPrinter()" class="btn btn-success" type="submit">Find</button>
+            <button (click)="printTest()" class="btn btn-success" type="submit">Test Print</button>
+            <button (click)="testPrintSerial()" class="btn btn-success" type="submit">Test Print Serial Port</button>
+          </td>
+
+      </tr>
+      </thead>
+      <tbody id="printer">
+          <tr  *ngFor="let row of printArray">
+            <td>{{row}}</td>
+          </tr>
+      </tbody>
+  </table>
+    <!--
+
+      <table id="conversation" class="table table-striped">
+            	<caption></caption>
+                <thead>
+
+                <tr>
+                    <th id="tableHeader">Printer Name</th>
+
+                    <td>
+                    	<button id="findPrinter" class="btn btn-success" type="submit">Find</button>
+                    	<button id="testPrint" class="btn btn-success" type="submit">Test Print</button>
+                    	<button id="testPrintSerial" class="btn btn-success" type="submit">Test Print Serial Port</button>
+                    </td>
+
+                </tr>
+                </thead>
+                <tbody id="printer">
+                </tbody>
+            </table>
+
+     -->
+
+
+  </div>
+
 
 </div>
 <router-outlet></router-outlet>
